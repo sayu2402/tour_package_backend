@@ -20,6 +20,10 @@ class ScheduleSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class TourPackageSerializer(serializers.ModelSerializer):
+    source_country = serializers.StringRelatedField()
+    source_city = serializers.StringRelatedField()
+    destination_country = serializers.StringRelatedField()
+    destination_city = serializers.StringRelatedField()
     photos = TourPackagePhotoSerializer(many=True, read_only=True)
     schedules = ScheduleSerializer(many=True, read_only=True)
 
@@ -31,7 +35,7 @@ class TourPackageSerializer(serializers.ModelSerializer):
 class EnquirySerializer(serializers.ModelSerializer):
     class Meta:
         model = Enquiry
-        fields = ['id', 'name', 'email', 'phone', 'message', 'related_schedule']
+        fields = '__all__'
 
 
 

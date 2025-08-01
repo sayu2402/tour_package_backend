@@ -1,8 +1,8 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from api.models import TourPackage
-from .serializers import EnquirySerializer, TourPackageSerializer
+from api.models import TourPackage, Banner
+from .serializers import EnquirySerializer, TourPackageSerializer, BannerSerializer
 from rest_framework.generics import ListAPIView, RetrieveAPIView
 
 
@@ -24,3 +24,8 @@ class PackageDetailAPIView(RetrieveAPIView):
     queryset = TourPackage.objects.all()
     serializer_class = TourPackageSerializer
     lookup_field = 'id'
+
+
+class BannerListAPIView(ListAPIView):
+    queryset = Banner.objects.all()
+    serializer_class = BannerSerializer

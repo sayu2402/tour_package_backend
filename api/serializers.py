@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from api.models import Enquiry, TourPackage, PackageSchedule, Banner, TourPackagePhoto, SchedulePhoto
+from api.models import Enquiry, TourPackage, PackageSchedule, Banner, TourPackagePhoto, SchedulePhoto, Country, City
 
 
 class TourPackagePhotoSerializer(serializers.ModelSerializer):
@@ -10,7 +10,7 @@ class TourPackagePhotoSerializer(serializers.ModelSerializer):
 class SchedulePhotoSerializer(serializers.ModelSerializer):
     class Meta:
         model = SchedulePhoto
-        fields = ['id', 'image']
+        fields = ['id', 'image', 'schedule']
 
 class ScheduleSerializer(serializers.ModelSerializer):
     photos = SchedulePhotoSerializer(many=True, read_only=True)
@@ -37,9 +37,29 @@ class EnquirySerializer(serializers.ModelSerializer):
         model = Enquiry
         fields = '__all__'
 
+class BannerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Banner
+        fields = '__all__'  
 
+
+class CountrySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Country
+        fields = '__all__'
+
+class CitySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = City
+        fields = '__all__'
+
+class TourPackageAdminSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TourPackage
+        fields = '__all__'
 
 class BannerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Banner
         fields = '__all__'
+

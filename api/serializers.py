@@ -5,7 +5,7 @@ from api.models import Enquiry, TourPackage, PackageSchedule, Banner, TourPackag
 class TourPackagePhotoSerializer(serializers.ModelSerializer):
     class Meta:
         model = TourPackagePhoto
-        fields = ['id', 'image']
+        fields = ['id', 'image','package']
 
 class SchedulePhotoSerializer(serializers.ModelSerializer):
     class Meta:
@@ -57,6 +57,31 @@ class TourPackageAdminSerializer(serializers.ModelSerializer):
     class Meta:
         model = TourPackage
         fields = '__all__'
+
+    def to_representation(self, instance):
+        rep = super().to_representation(instance)
+        rep['source_country'] = {
+            'id': instance.source_country.id,
+            'name': instance.source_country.name
+        } if instance.source_country else None
+
+        rep['destination_country'] = {
+            'id': instance.destination_country.id,
+            'name': instance.destination_country.name
+        } if instance.destination_country else None
+
+        rep['source_city'] = {
+            'id': instance.source_city.id,
+            'name': instance.source_city.name
+        } if instance.source_city else None
+
+        rep['destination_city'] = {
+            'id': instance.destination_city.id,
+            'name': instance.destination_city.name
+        } if instance.destination_city else None
+
+        return rep
+
 
 class BannerSerializer(serializers.ModelSerializer):
     class Meta:

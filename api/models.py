@@ -61,8 +61,9 @@ class Enquiry(models.Model):
     related_schedule = models.ForeignKey(PackageSchedule, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
-        return f"{self.name} - {self.related_schedule if self.related_schedule else 'General Enquiry'}"
-
+        if self.related_schedule:
+            return f"{self.name} - {self.related_schedule.title} ({self.related_schedule.package.title})"
+        return f"{self.name} - General Enquiry"
 
 class Banner(models.Model):
     title = models.CharField(max_length=100)

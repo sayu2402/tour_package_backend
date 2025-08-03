@@ -92,3 +92,7 @@ class SchedulePhotoDetailAPIView(RetrieveUpdateDestroyAPIView):
     queryset = SchedulePhoto.objects.all()
     serializer_class = SchedulePhotoSerializer
     lookup_field = 'id'
+
+class EnquiryListAPIView(ListAPIView):
+    queryset = Enquiry.objects.all().order_by('-id')
+    serializer_class = EnquirySerializer

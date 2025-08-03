@@ -14,6 +14,7 @@ class SchedulePhotoSerializer(serializers.ModelSerializer):
 
 class ScheduleSerializer(serializers.ModelSerializer):
     photos = SchedulePhotoSerializer(many=True, read_only=True)
+    package_title = serializers.CharField(source='package.title', read_only=True)
 
     class Meta:
         model = PackageSchedule
@@ -82,9 +83,15 @@ class TourPackageAdminSerializer(serializers.ModelSerializer):
 
         return rep
 
+class EnquirySerializer(serializers.ModelSerializer):
+    related_schedule_title = serializers.SerializerMethodField()
 
-class BannerSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Banner
-        fields = '__all__'
+        model = Enquiry
+        fields = ['id', 'name', 'email', 'phone', 'message', 'related_schedule', 'related_schedule_title']
 
+    def get_related_schedule_title(self, obj):
+        print(f"Checking enquiry ID {obj.id} - related_schedule: {obj.related_schedule}")
+        if obj.related_schedule:
+            return obj.related_schedule.title
+        return 'General Enquiry'

@@ -20,4 +20,6 @@ urlpatterns = [
     path('admin/tour-photos/<int:id>/', TourPackagePhotoDetailAPIView.as_view(), name='tourphoto-detail'),
     path('admin/schedule-photos/', SchedulePhotoListCreateAPIView.as_view(), name='schedulephoto-list-create'),
     path('admin/schedule-photos/<int:id>/', SchedulePhotoDetailAPIView.as_view(), name='schedulephoto-detail'),
+    path('admin/enquiries/', EnquiryListAPIView.as_view(), name='enquiry-list'),
+
 ] 

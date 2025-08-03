@@ -14,17 +14,14 @@ class EnquiryCreateAPIView(APIView):
             return Response({"message": "Enquiry submitted successfully!"}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
 class PackageListAPIView(ListAPIView):
     queryset = TourPackage.objects.all()
     serializer_class = TourPackageSerializer
-
 
 class PackageDetailAPIView(RetrieveAPIView):
     queryset = TourPackage.objects.all()
     serializer_class = TourPackageSerializer
     lookup_field = 'id'
-
 
 class BannerListAPIView(ListAPIView):
     queryset = Banner.objects.all()
